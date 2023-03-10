@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+  .flex-bc {
+    @apply flex items-center justify-center;
+  }
+  .flex-ac {
+    @apply flex items-center justify-center;
+  }
+
+  .wh-full {
+    @apply h-full w-full;
+  }
+}

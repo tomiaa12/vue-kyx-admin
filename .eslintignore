@@ -1,0 +1,10 @@
+# 配置不需要做代码格式校验的文件
+node_modules
+dist
+
+*.css
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.d.ts

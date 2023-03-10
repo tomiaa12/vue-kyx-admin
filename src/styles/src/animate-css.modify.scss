@@ -1,0 +1,55 @@
+/** 
+ * animate.css 修改
+ */
+
+$prefix: '[class*="animate__"]';
+
+// animate__ 开头的 class 默认带有 .animate__animated 的属性
+// 不需要每个动画的类都加 animate__animated，直接添加 animate__[动画名] 即可
+#{$prefix} {
+  animation-duration: 1s;
+  animation-duration: var(--animate-duration);
+  animation-fill-mode: both;
+
+  // 延迟
+  // 生成 delay 1 - 1.5 - 2 - 2.5 - ... - 8.5 的 delay
+  @for $i from 0 through 8 {
+    &.animate__delay-#{$i}s {
+      animation-delay: #{$i}s;
+      animation-delay: calc(var(--animate-delay) * $i);
+    }
+    &.animate__delay-#{$i}\.5s {
+      animation-delay: #{($i + 0.5)}s;
+      animation-delay: calc(var(--animate-delay) * #{($i + 0.5)});
+    }
+  }
+
+  // 速度
+  &.animate__slow {
+    animation-duration: 2s;
+    animation-duration: calc(var(--animate-duration) * 2);
+  }
+  &.animate__slower {
+    animation-duration: 3s;
+    animation-duration: calc(var(--animate-duration) * 3);
+  }
+  &.animate__fast {
+    animation-duration: 0.8s;
+    animation-duration: calc(var(--animate-duration) * 0.8);
+  }
+  &.animate__faster {
+    animation-duration: 0.5s;
+    animation-duration: calc(var(--animate-duration) * 0.5);
+  }
+
+  // 循环播放次数
+  @for $i from 1 through 8 {
+    &.animate__repeat-#{$i} {
+      animation-iteration-count: $i;
+      animation-iteration-count: calc(var(--animate-repeat) * $i);
+    }
+  }
+  &.animate__infinite {
+    animation-iteration-count: infinite;
+  }
+}

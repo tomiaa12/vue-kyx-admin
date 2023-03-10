@@ -1,0 +1,20 @@
+// tailwindCSS 原子类
+@use "./src/tailwind";
+
+// 样式重置
+@use "./src/reset";
+
+// Element Plus 样式
+@use "element-plus/dist/index.css";
+
+// Element Plus 夜间模式
+@use "element-plus/theme-chalk/dark/css-vars.css";
+
+// animate.css 动画 https://animate.style
+@use "animate.css";
+
+// animate.css 动画修改
+@use "./src/animate-css.modify.scss";
+
+// 加载进度条
+@use "nprogress/nprogress.css";
