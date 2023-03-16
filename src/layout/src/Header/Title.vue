@@ -1,8 +1,8 @@
 <template>
-  <h1
+  <h2
     ref="dom"
-    class="py-4 text-center text-2xl"
-  ></h1>
+    class="text-xl"
+  ></h2>
 </template>
 
 <script setup lang="ts">
@@ -50,27 +50,6 @@ onMounted(() => {
     .delete(1, { delay: 200 })
     .type("T")
     .move(null, { to: "END", delay: 400 })
-    .break({ delay: 400 })
-    .type("houtai", { delay: 100 })
-    .delete(6, { instant: true })
-    .type("后台", { instant: true, delay: 500 })
-    .type("guanli", { delay: 100 })
-    .delete(6, { instant: true })
-    .type("管理", { instant: true, delay: 500 })
-    .type("xitong", { delay: 100 })
-    .delete(6, { instant: true })
-    .type("系统", { instant: true, delay: 500 })
-    .type("（）")
-    .move(-1, { delay: 400 })
-    .type("jianrong", { delay: 100 })
-    .delete(8, { instant: true })
-    .type("兼容", { instant: true, delay: 500 })
-    .type("yidong", { delay: 100 })
-    .type("duan", { delay: 500 })
-    .delete(10, { instant: true })
-    .type("移动端", { instant: true, delay: 1500 })
-    .move(1, { delay: 2500 })
-    .type("。")
     .go()
 })
 </script>

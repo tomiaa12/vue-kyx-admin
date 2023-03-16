@@ -4,4 +4,4 @@ trailingComma: "es5" # 在多行数组、对象的最后一项添加逗号，单
 arrowParens: "avoid" # 箭头函数只有一个参数时省略括号
 endOfLine: "auto" # 结尾自动换行
 singleAttributePerLine: true # true 标签属性使用单行
-plugins: ["prettier-plugin-tailwindcss"] # tailwind 演示的 class 类名排序
+plugins: ["prettier-plugin-tailwindcss"] # tailwind 样式的 class 类名排序

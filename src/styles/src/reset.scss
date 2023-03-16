@@ -166,17 +166,13 @@ label {
   font-weight: bold;
 }
 
-div:focus {
-  outline: none;
-}
-
-button,
-[role="button"],
-[type="button"],
-[type="reset"],
-[type="submit"] {
-  cursor: pointer;
-}
+// button,
+// [role="button"],
+// [type="button"],
+// [type="reset"],
+// [type="submit"] {
+//   cursor: pointer;
+// }
 
 textarea {
   resize: vertical;
@@ -196,6 +192,7 @@ textarea {
   font-size: 100%;
   line-height: inherit;
   color: inherit;
+  outline: none;
 }
 
 html,
@@ -237,7 +234,6 @@ svg {
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: rgba(144, 147, 153, 1);
-  border-width: 0.12em;
 }
 
 /* 全屏 */

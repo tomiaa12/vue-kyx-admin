@@ -26,7 +26,7 @@ module.exports = {
   theme: {
     screens: {
       // 屏幕断点与 Element el-row 统一，
-      // xs 使用 max-sm: 开头
+      // xs: "< 768px" 使用 max-sm: 开头
       sm: "768px",
       md: "992px",
       lg: "1200px",

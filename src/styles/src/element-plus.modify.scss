@@ -1,0 +1,5 @@
+// dropdown 鼠标悬停触发 focus-visible 显示了 outline 轮廓，暂时覆盖解决，官方还没有提供解决方案
+// https://github.com/element-plus/element-plus/issues/11662
+.el-dropdown > span:focus-visible {
+  outline: unset;
+}

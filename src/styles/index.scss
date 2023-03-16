@@ -1,6 +1,3 @@
-// tailwindCSS 原子类
-@use "./src/tailwind";
-
 // 样式重置
 @use "./src/reset";
 
@@ -9,6 +6,12 @@
 
 // Element Plus 夜间模式
 @use "element-plus/theme-chalk/dark/css-vars.css";
+
+// 对 Element Plus 样式进行全局调整
+@use "./src/element-plus.modify.scss";
+
+// tailwindCSS 原子类 (在 Element 样式之后，class 覆盖 Element 原有样式)
+@use "./src/tailwind";
 
 // animate.css 动画 https://animate.style
 @use "animate.css";

@@ -7,10 +7,10 @@
     @apply flex items-center justify-center;
   }
   .flex-bc {
-    @apply flex items-center justify-center;
+    @apply flex items-center justify-between;
   }
   .flex-ac {
-    @apply flex items-center justify-center;
+    @apply flex items-center justify-around;
   }
 
   .wh-full {

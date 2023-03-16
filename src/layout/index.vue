@@ -1,28 +1,28 @@
 <template>
-  <div class="h-full">
-    <el-container class="h-full">
-      <el-aside width="auto"> </el-aside>
-      <el-container>
-        <el-main class="!p-0">
-          <el-scrollbar
-            class="main-scroll"
-            view-class="h-full"
-          >
-            <RouterView />
-          </el-scrollbar>
-        </el-main>
-      </el-container>
+  <el-container class="h-full">
+    <Aside v-if="!route.meta.fullScreen" />
+
+    <Header />
+    <el-container class="flex-col">
+      <el-scrollbar view-class="h-full">
+        <Main />
+      </el-scrollbar>
     </el-container>
-  </div>
+  </el-container>
 </template>
 
-<script setup lang="ts">
-import { RouterView } from "vue-router"
-import { ref, PropType } from "vue"
-const props = defineProps({})
-const emits = defineEmits([])
+<script lang="ts" setup>
+import { ref } from "vue"
+import Aside from "./src/Aside.vue"
+import Header from "./src/Header.vue"
+import Main from "./src/Main.vue"
+import { useRoute } from "vue-router"
+
+const route = useRoute()
 </script>
+
 <style lang="scss" scoped>
-.layout {
+.el-container {
+  --header-height: 60px;
 }
 </style>

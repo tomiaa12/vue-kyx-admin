@@ -8,13 +8,17 @@ declare module "vue-router" {
   interface RouteMeta {
     // 标题
     title: string
-    // 是否不在菜单菜单中显示
+    // 在菜单中隐藏
     hiddenMenu?: boolean
+    // 图标
+    icon?: string
+    // 无 layout 全屏页面
+    fullScreen?: boolean
   }
 }
 
 // 将简写的 path 改为完整 / 开头的路径
-export const routers = resolveFullPath(
+export const routes = resolveFullPath(
   // 批量导入 src 下的路由
   Object.values(
     import.meta.glob<RouteRecordRaw[]>("./src/*.ts", {
@@ -33,7 +37,7 @@ const router = createRouter({
       // 全局路由以 layout 包裹
       component: () => import("@/layout/index.vue"),
       // 全部路由拍平为一级
-      children: formatTwoStageRoutes(routers),
+      children: formatTwoStageRoutes(routes),
     },
   ],
 })
