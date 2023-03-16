@@ -1,0 +1,55 @@
+{
+  "version": 1.1,
+  "atDirectives": [
+    {
+      "name": "@tailwind",
+      "description": "使用 @tailwind 指令将tailwind的“基本”、“组件”、“实用程序”和“屏幕”样式插入CSS。",
+      "references": [
+        {
+          "name": "Tailwind 文档",
+          "url": "https://tailwindcss.com/docs/functions-and-directives#tailwind"
+        }
+      ]
+    },
+    {
+      "name": "@apply",
+      "description": "使用@apply将任何现有的实用程序类内联到您自己的自定义CSS中。",
+      "references": [
+        {
+          "name": "Tailwind 文档",
+          "url": "https://tailwindcss.com/docs/functions-and-directives#apply"
+        }
+      ]
+    },
+    {
+      "name": "@responsive",
+      "description": "使用此指令控制尾风将悬停、聚焦、响应、暗模式和每个类别的其他变体。",
+      "references": [
+        {
+          "name": "Tailwind 文档",
+          "url": "https://tailwindcss.com/docs/functions-and-directives#responsive"
+        }
+      ]
+    },
+    {
+      "name": "@screen",
+      "description": "screen函数允许您创建按名称引用断点的媒体查询，而不是在自己的CSS中复制它们的值。",
+      "references": [
+        {
+          "name": "Tailwind 文档",
+          "url": "https://tailwindcss.com/docs/functions-and-directives#screen"
+        }
+      ]
+    },
+    {
+      "name": "@variants",
+      "description": "通过在“@variants”指令中包装它们的定义，生成您自己的实用程序的“hover”、“focus”、“active”和其他。",
+      "references": [
+        {
+          "name": "Tailwind 文档",
+          "url": "https://tailwindcss.com/docs/functions-and-directives#variants"
+        }
+      ]
+    }
+  ]
+}
