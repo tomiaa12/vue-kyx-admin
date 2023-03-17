@@ -18,6 +18,6 @@ import { useRouter } from "vue-router"
 const router = useRouter()
 
 const logout = () => {
-  router.push("login")
+  router.push("/login")
 }
 </script>

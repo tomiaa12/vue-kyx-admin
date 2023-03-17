@@ -1,6 +1,6 @@
 <template>
   <el-container class="h-full">
-    <Aside v-if="!route.meta.fullScreen" />
+    <Aside />
 
     <Header />
     <el-container class="flex-col">
@@ -12,17 +12,19 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue"
+import { computed, ref } from "vue"
 import Aside from "./src/Aside.vue"
 import Header from "./src/Header.vue"
 import Main from "./src/Main.vue"
 import { useRoute } from "vue-router"
 
 const route = useRoute()
+
+const headerHeight = computed(() => (route.meta.fullScreen ? 0 : "60px"))
 </script>
 
 <style lang="scss" scoped>
 .el-container {
-  --header-height: 60px;
+  --header-height: v-bind(headerHeight);
 }
 </style>

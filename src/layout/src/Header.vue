@@ -1,6 +1,6 @@
 <template>
-  <transition>
-    <el-header v-if="!route.meta.fullScreen">
+  <transition name="fade">
+    <el-header v-show="!route.meta.fullScreen">
       <div class="left">
         <slot name="left">
           <Logo />
@@ -35,10 +35,17 @@ const emits = defineEmits([])
 </script>
 <style lang="scss" scoped>
 .el-header {
-  @apply flex-bc absolute z-10 w-full border-b border-solid border-neutral-100;
+  @apply flex-bc absolute z-10 w-full border-b border-solid border-neutral-100 duration-1000;
+  transition: all 1s;
   --el-header-height: var(--header-height);
   backdrop-filter: blur(10px);
   background-color: rgba(255, 255, 255, 0.5);
   box-shadow: 0 2px 4px -3px rgb(0 0 0 / 0.1);
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  overflow: hidden;
+  transform: translateY(-100px);
 }
 </style>
