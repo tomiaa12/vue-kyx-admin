@@ -14,6 +14,8 @@ declare module "vue-router" {
     icon?: string
     // 无 layout 全屏页面
     fullScreen?: boolean
+    // 页面缓存
+    keepAlive?: boolean
   }
 }
 

@@ -6,15 +6,16 @@ export default {
   meta: {
     title: "多级菜单",
   },
-  component: () => import("@/views/home/index.vue"),
+  redirect: "/multilevel/menu1",
   children: [
     {
       name: "menu1",
       path: "menu1",
       meta: {
         title: "菜单1-1",
+        keepAlive: true,
       },
-      component: () => import("@/views/home/index.vue"),
+      component: () => import("@/views/multilevel/menu1/index.vue"),
     },
     {
       name: "menu2",
@@ -22,7 +23,7 @@ export default {
       meta: {
         title: "菜单1-2",
       },
-      component: () => import("@/views/home/index.vue"),
+      component: () => import("@/views/multilevel/menu2/index.vue"),
     },
   ],
 } as RouteRecordRaw

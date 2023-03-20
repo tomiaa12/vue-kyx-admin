@@ -1,5 +1,5 @@
 <template>
-  <transition name="fade">
+  <transition name="layout-fade">
     <el-header v-show="!route.meta.fullScreen">
       <div class="left">
         <slot name="left">
@@ -48,8 +48,8 @@ const emits = defineEmits([])
   padding-right: 0;
   width: var(--el-aside-width);
 }
-.fade-enter-from,
-.fade-leave-to {
+.layout-fade-enter-from,
+.layout-fade-leave-to {
   overflow: hidden;
   transform: translateY(-100px);
 }

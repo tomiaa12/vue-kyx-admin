@@ -6,8 +6,7 @@ const { t } = useI18n()
 
 <template>
   <div id="latex">
-    <h1>{{ t("buttons.hsLoginOut") }}</h1>
-    <h1>{{ t("hello") }}</h1>
+    <!-- <h1>{{ t("hello") }}</h1> -->
     <button>dasd</button>
     <div>div</div>
     <a href="a">aa</a>
@@ -30,9 +29,7 @@ const { t } = useI18n()
     />
     <input type="submit" />
     <input type="reset" />
-    <hr />
-    <hr dashed />
-    <hr double />
+    <!-- <hr /> -->
 
     <p>
       图片

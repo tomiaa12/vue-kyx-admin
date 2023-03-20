@@ -3,6 +3,7 @@
     <Aside />
 
     <Header />
+
     <el-container class="flex-col">
       <el-scrollbar view-class="h-full">
         <Main />
@@ -26,5 +27,10 @@ const headerHeight = computed(() => (route.meta.fullScreen ? 0 : "60px"))
 <style lang="scss" scoped>
 .el-container {
   --header-height: v-bind(headerHeight);
+}
+
+:deep(.layout-fade-enter-active),
+:deep(.layout-fade-leave-active) {
+  transition: 0.3s ease;
 }
 </style>

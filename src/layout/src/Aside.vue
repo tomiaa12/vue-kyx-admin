@@ -1,5 +1,5 @@
 <template>
-  <transition name="fade">
+  <transition name="layout-fade">
     <el-aside
       v-if="!route.meta.fullScreen"
       width="200px"
@@ -32,8 +32,8 @@ const route = useRoute()
   @apply bg-gray-50 shadow-xl duration-1000;
 }
 
-.fade-enter-from,
-.fade-leave-to {
+.layout-fade-enter-from,
+.layout-fade-leave-to {
   width: 0;
   white-space: nowrap;
   transform: translateX(-120%);

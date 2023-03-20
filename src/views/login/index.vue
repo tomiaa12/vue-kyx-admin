@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-center wh-full">
+  <div class="flex-center h-full">
     <div class="fixed right-4 top-4">
       <KSwitchDark />
     </div>

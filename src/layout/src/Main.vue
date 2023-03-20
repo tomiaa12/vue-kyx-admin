@@ -1,65 +1,53 @@
 <template>
   <el-main>
-    <router-view v-slot="{ Component }">
+    <!-- header 高度占位 -->
+    <div style="height: var(--header-height)"></div>
+
+    <router-view v-slot="{ Component, route }">
       <transition
+        name="layout-fade"
         mode="out-in"
-        enter-active-class="fadeInRight"
-        leave-active-class="fadeOutLeft"
       >
-        <!-- <keep-alive> -->
-        <component :is="Component" />
-        <!-- </keep-alive> -->
+        <!-- transition 只能有一个组件，keep-alive封装 -->
+        <ComKeepAlive :component="Component"></ComKeepAlive>
+        <!-- <keep-alive>
+          <RootNode
+            v-if="route.meta.keepAlive"
+            :key="route.path"
+            :component="Component"
+          />
+        </keep-alive> -->
+      </transition>
+      <transition
+        name="layout-fade"
+        mode="out-in"
+        v-if="!$route.meta.keepAlive"
+      >
+        <component
+          :key="route.path"
+          :is="Component"
+        />
       </transition>
     </router-view>
   </el-main>
 </template>
 
 <script setup lang="ts">
-import { ref, PropType } from "vue"
+import { ref, PropType, nextTick } from "vue"
 // const props = defineProps({});
-const emits = defineEmits([])
+import ComKeepAlive from "./Main/ComKeepAlive.vue"
 </script>
 <style lang="scss" scoped>
 .el-main {
-  @apply h-full p-0 duration-1000;
-  padding-top: var(--header-height);
+  @apply wh-full duration-1000;
 }
 
-// 路由界面切换动画
-.fadeInRight,
-.fadeOutLeft {
-  animation-duration: var(--animate-duration);
-  animation-fill-mode: both;
-  // .el-scrollbar__view {
-  //   @apply overflow-hidden;
-  // }
+.layout-fade-enter-from {
+  opacity: 0;
+  transform: translateX(10%);
 }
-
-.fadeInRight {
-  animation-name: fadeInRight;
-}
-.fadeOutLeft {
-  animation-name: fadeOutLeft;
-}
-
-@keyframes fadeOutLeft {
-  0% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(-10%);
-  }
-}
-@keyframes fadeInRight {
-  0% {
-    opacity: 0;
-    transform: translateX(10%);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
+.layout-fade-leave-to {
+  opacity: 0;
+  transform: translateX(-10%);
 }
 </style>
