@@ -35,6 +35,7 @@ const route = useRoute()
 .fade-enter-from,
 .fade-leave-to {
   width: 0;
+  white-space: nowrap;
   transform: translateX(-120%);
 }
 </style>

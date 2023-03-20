@@ -38,11 +38,16 @@ const emits = defineEmits([])
   @apply flex-bc absolute z-10 w-full border-b border-solid border-neutral-100 duration-1000;
   transition: all 1s;
   --el-header-height: var(--header-height);
+  padding-left: 0;
   backdrop-filter: blur(10px);
   background-color: rgba(255, 255, 255, 0.5);
   box-shadow: 0 2px 4px -3px rgb(0 0 0 / 0.1);
 }
-
+.left {
+  padding: var(--el-header-padding);
+  padding-right: 0;
+  width: var(--el-aside-width);
+}
 .fade-enter-from,
 .fade-leave-to {
   overflow: hidden;
