@@ -1,13 +1,6 @@
 {
   "extends": "@vue/tsconfig/tsconfig.web.json",
-  "include": [
-    "env.d.ts",
-    "src/**/*",
-    "src/**/*.vue",
-    "src/**/*.ts",
-    "src/**/*.d.ts",
-    "src/**/*.tsx"
-  ],
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
@@ -20,13 +13,12 @@
       "unplugin-vue-define-options/macros-global",
       // @intlify/unplugin-vue-i18n include 字段批量导入的语言
       "@intlify/unplugin-vue-i18n/messages"
-    ],
-    "preserveValueImports": false
+    ]
   },
 
   "references": [
     {
-      "path": "./tsconfig.config.json"
+      "path": "./tsconfig.node.json"
     }
   ]
 }

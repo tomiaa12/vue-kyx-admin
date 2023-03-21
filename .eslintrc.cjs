@@ -11,8 +11,8 @@ module.exports = {
     "plugin:vue/vue3-essential",
     "eslint:recommended",
     "@vue/eslint-config-typescript",
-    "@vue/eslint-config-prettier",
-    "plugin:prettier/recommended", // 使 eslint 使用 prettierrc 的规则来校验，避免两者之间的格式冲突，添加到数组的最后一个元素覆盖来去除不必要的规则冲突。npm install --save-dev eslint-config-prettier
+    "@vue/eslint-config-prettier/skip-formatting", // 此配置 eslint 不会报告格式问题,交给 prettierrc 格式化
+    "plugin:vue/vue3-recommended",
   ],
   plugins: ["vue", "@typescript-eslint"],
   rules: {
