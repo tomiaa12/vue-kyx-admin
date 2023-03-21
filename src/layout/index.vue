@@ -29,8 +29,8 @@ const headerHeight = computed(() => (route.meta.fullScreen ? 0 : "60px"))
   --header-height: v-bind(headerHeight);
 }
 
-:deep(.layout-fade-enter-active),
-:deep(.layout-fade-leave-active) {
-  transition: 3s ease;
+:deep(.layout-fade-leave-active),
+:deep(.layout-fade-enter-active) {
+  transition: 0.3s ease;
 }
 </style>

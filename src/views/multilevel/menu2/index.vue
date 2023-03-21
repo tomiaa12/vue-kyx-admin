@@ -1,4 +1,6 @@
-<template>menu2</template>
+<template>
+  <div>menu2</div>
+</template>
 
 <script setup lang="ts">
 import { ref } from "vue"
