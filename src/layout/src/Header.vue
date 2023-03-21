@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, PropType } from "vue"
+
 import Avatar from "./Header/Avatar.vue"
 import Logo from "./Header/Logo.vue"
 import Title from "./Header/Title.vue"

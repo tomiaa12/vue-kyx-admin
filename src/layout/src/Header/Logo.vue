@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, PropType } from "vue"
+
 import ComTypeIt from "@/components/ComTypeIt/index.vue"
 // const props = defineProps({})
 const emits = defineEmits([])

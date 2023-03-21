@@ -1,14 +1,14 @@
 <template>
   <component
-    ref="dom"
     :is="tag"
+    ref="dom"
   >
     <slot></slot>
   </component>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, PropType } from "vue"
+import { ref, onMounted, type PropType } from "vue"
 import TypeIt from "typeit"
 
 const props = defineProps({

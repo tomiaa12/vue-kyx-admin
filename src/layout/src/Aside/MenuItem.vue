@@ -1,8 +1,8 @@
 <template>
   <template v-for="route of data">
     <component
-      v-if="!route.meta?.hiddenMenu"
       :is="route.children?.length ? 'el-sub-menu' : 'el-menu-item'"
+      v-if="!route.meta?.hiddenMenu"
       :index="route.path"
     >
       <template #title>{{ route.meta?.title }}</template>

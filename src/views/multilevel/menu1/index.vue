@@ -25,7 +25,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, PropType } from "vue"
 const props = defineProps({})
 const emits = defineEmits([])
 </script>

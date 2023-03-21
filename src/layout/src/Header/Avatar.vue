@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, PropType } from "vue"
+
 import { useRouter } from "vue-router"
 const router = useRouter()
 

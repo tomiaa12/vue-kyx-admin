@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, PropType } from "vue"
+import { ref } from "vue"
 import MenuItem from "./Aside/MenuItem.vue"
 import { routes } from "@/router"
 import { useRoute } from "vue-router"
