@@ -31,6 +31,6 @@ const headerHeight = computed(() => (route.meta.fullScreen ? 0 : "60px"))
 
 :deep(.layout-fade-enter-active),
 :deep(.layout-fade-leave-active) {
-  transition: 0.3s ease;
+  transition: 3s ease;
 }
 </style>

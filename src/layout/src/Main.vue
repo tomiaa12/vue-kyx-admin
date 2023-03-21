@@ -9,23 +9,20 @@
         mode="out-in"
       >
         <!-- transition 只能有一个组件，keep-alive封装 -->
-        <ComKeepAlive :component="Component"></ComKeepAlive>
-        <!-- <keep-alive>
-          <RootNode
-            v-if="route.meta.keepAlive"
-            :key="route.path"
-            :component="Component"
-          />
-        </keep-alive> -->
+        <ComKeepAlive
+          :component="Component"
+          :route="route"
+        ></ComKeepAlive>
       </transition>
+
       <transition
         name="layout-fade"
         mode="out-in"
-        v-if="!$route.meta.keepAlive"
       >
-        <component
-          :key="route.path"
-          :is="Component"
+        <RootNode
+          v-if="!$route.meta.keepAlive"
+          :key="$route.path"
+          :component="Component"
         />
       </transition>
     </router-view>
@@ -33,9 +30,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, PropType, nextTick } from "vue"
-// const props = defineProps({});
+import { ref } from "vue"
 import ComKeepAlive from "./Main/ComKeepAlive.vue"
+import RootNode from "./Main/RootNode.vue"
 </script>
 <style lang="scss" scoped>
 .el-main {
