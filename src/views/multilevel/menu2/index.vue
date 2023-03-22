@@ -1,5 +1,9 @@
 <template>
-  <div>menu2</div>
+  <div>
+    menu2
+
+    <el-input-number> </el-input-number>
+  </div>
 </template>
 
 <script setup lang="ts">

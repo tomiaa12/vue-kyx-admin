@@ -21,6 +21,7 @@ export default {
       name: "menu2",
       path: "menu2",
       meta: {
+        keepAlive: true,
         title: "菜单1-2",
       },
       component: () => import("@/views/multilevel/menu2/index.vue"),

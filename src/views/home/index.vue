@@ -6,6 +6,8 @@ const { t } = useI18n()
 
 <template>
   <div id="latex">
+    <el-input-number> </el-input-number>
+
     <!-- <h1>{{ t("hello") }}</h1> -->
     <button>dasd</button>
     <div>div</div>

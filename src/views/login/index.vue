@@ -37,9 +37,9 @@
         <div class="flex-center animate__fadeInUp animate__delay-1s w-full">
           <el-button
             type="primary"
-            @click="login"
             round
             class="w-2/3 bg-gradient-to-r from-sky-500 to-indigo-400"
+            @click="login"
           >
             登录
           </el-button>
@@ -50,11 +50,11 @@
 </template>
 
 <script setup lang="ts">
-
 import { useRouter } from "vue-router"
 import Title from "./components/Title.vue"
 
 import axios from "axios"
+import { ref } from "vue"
 const router = useRouter()
 const form = ref({
   username: "admin",
