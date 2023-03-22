@@ -4,8 +4,14 @@
 
     <Header />
 
-    <el-container class="flex-col">
-      <el-scrollbar view-class="h-full">
+    <el-container direction="vertical">
+      <el-scrollbar
+        view-class="flex min-h-full flex-col"
+        :view-style="{
+          height: route.meta.fullScreen && '100%',
+        }"
+      >
+        <Tag />
         <Main />
       </el-scrollbar>
     </el-container>
@@ -17,16 +23,21 @@ import { computed, ref } from "vue"
 import Aside from "./src/Aside.vue"
 import Header from "./src/Header.vue"
 import Main from "./src/Main.vue"
+import Tag from "./src/Main/Tag.vue"
 import { useRoute } from "vue-router"
 
 const route = useRoute()
 
 const headerHeight = computed(() => (route.meta.fullScreen ? 0 : "60px"))
+const tagHeight = computed(() => "40px")
 </script>
 
 <style lang="scss" scoped>
 .el-container {
+  // layout header 高度
   --header-height: v-bind(headerHeight);
+  // layout tag 标签高度
+  --tag-height: v-bind(tagHeight);
 }
 
 :deep(.layout-fade-leave-active),

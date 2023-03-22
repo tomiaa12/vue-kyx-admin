@@ -22,7 +22,6 @@
 </template>
 
 <script setup lang="ts">
-
 import Avatar from "./Header/Avatar.vue"
 import Logo from "./Header/Logo.vue"
 import Title from "./Header/Title.vue"
@@ -35,7 +34,7 @@ const emits = defineEmits([])
 </script>
 <style lang="scss" scoped>
 .el-header {
-  @apply flex-bc absolute z-10 w-full border-b border-solid border-neutral-100 duration-1000;
+  @apply flex-bc absolute z-10 w-full  border-solid border-neutral-100 duration-1000;
   transition: all 1s;
   --el-header-height: var(--header-height);
   padding-left: 0;
