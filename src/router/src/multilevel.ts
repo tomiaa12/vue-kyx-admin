@@ -19,7 +19,7 @@ export default {
     },
     {
       name: "menu2",
-      path: "menu2",
+      path: "menu2/:id",
       meta: {
         keepAlive: true,
         title: "菜单1-2",

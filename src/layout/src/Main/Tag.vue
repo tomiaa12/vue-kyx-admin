@@ -1,26 +1,49 @@
 <template>
   <div class="tag-container">
     <el-scrollbar view-class="scroll-view">
-      <button
-        v-for="i in 20"
-        :class="i == 1 ? 'active' : ''"
+      <router-link
+        v-for="data in layoutStore.tags"
+        :to="data"
       >
-        <el-icon-clock class="mr-2" />
-        <span>chack</span>
-        <el-icon class="close">
-          <el-icon-close />
-        </el-icon>
-      </button>
+        <button
+          :class="{
+            active: data === layoutStore.curTag,
+          }"
+        >
+          <el-icon-clock class="mr-2" />
+          <span class="h-full truncate text-sm">{{ data.meta.title }}</span>
+          <el-icon class="close" @click="close">
+            <el-icon-close />
+          </el-icon>
+        </button>
+      </router-link>
     </el-scrollbar>
-    <el-icon-more-filled class="shrink-0" />
+    <el-icon-more-filled class="ml-auto shrink-0" />
   </div>
 </template>
 
 <script setup lang="ts">
-import type { PropType } from "vue"
-import { ref } from "vue"
+import { watch, type PropType } from "vue"
+import { useLayoutStore, type Tag } from "@/stores"
+import { useRoute, useRouter } from "vue-router"
 // const props = defineProps({})
 // const emits = defineEmits([])
+
+const layoutStore = useLayoutStore()
+
+const route = useRoute()
+const router = useRouter()
+
+watch(
+  () => route,
+  () => {
+    layoutStore.push(route)
+  },
+  {
+    immediate: true,
+    deep: true,
+  }
+)
 </script>
 <style lang="scss" scoped>
 .tag-container {
@@ -46,7 +69,7 @@ import { ref } from "vue"
   }
 
   button {
-    @apply flex-bc mr-1  rounded px-2 py-1 transition-all;
+    @apply flex-bc mr-1  rounded border border-transparent px-2 py-1  transition-all;
     &.active {
       @apply border border-gray-200 bg-white/50;
 

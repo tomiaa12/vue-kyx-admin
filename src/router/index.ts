@@ -16,6 +16,8 @@ declare module "vue-router" {
     fullScreen?: boolean
     // 页面缓存
     keepAlive?: boolean
+    // 是否不添加信息到标签页，（默认`false`）
+    hiddenTag?: boolean
   }
 }
 

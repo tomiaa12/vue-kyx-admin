@@ -29,7 +29,7 @@ import { useRoute } from "vue-router"
 const route = useRoute()
 
 const headerHeight = computed(() => (route.meta.fullScreen ? 0 : "60px"))
-const tagHeight = computed(() => "50px")
+const tagHeight = computed(() => "45px")
 const asideWidth = computed(() => "200px")
 </script>
 
