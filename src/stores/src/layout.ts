@@ -3,11 +3,18 @@ import { defineStore } from "pinia"
 import type { RouteMeta, RouteLocationNormalizedLoaded } from "vue-router"
 import router from "@/router"
 
+// 标签
 export interface Tag {
   path: string
   meta: RouteMeta
   params?: { [prop: string]: any }
   query?: { [prop: string]: any }
+}
+
+// 删除标签设置
+interface DelTagOptions {
+  // 删除后打开附近标签
+  openNearbyTags: boolean
 }
 
 export const useLayoutStore = defineStore("layout", () => {
@@ -37,11 +44,6 @@ export const useLayoutStore = defineStore("layout", () => {
     // 是否已添加
     const oldTag = tags.value.find(i => i.path === data.path)
 
-    // 是否为动态路由
-    const isDynamic = route.matched[route.matched.length - 1].path.includes(":")
-    // /\/multilevel\/menu2\/[^/]+$/.test(a)
-    console.log(tags.value, route.matched[route.matched.length - 1].path)
-
     // 已存在的标签只需要更新值
     if (oldTag) {
       Object.assign(oldTag, data)
@@ -51,7 +53,21 @@ export const useLayoutStore = defineStore("layout", () => {
 
     tags.value.push(data)
 
+    // 设置当前激活标签
     setCurTag(data)
+
+    // 是否为动态路由
+    const path = route.matched[route.matched.length - 1].path
+    const isDynamic = path.includes(":")
+    if (isDynamic) {
+      const reg = new RegExp(`^${path.replace(/:[^/]+/g, "[^/]+")}$`)
+
+      // 找出当前动态路由已添加的标签
+      const res = tags.value.filter(i => reg.test(i.path))
+
+      // 超过最大动态路由数量时，删除第一个
+      if (res.length > (data.meta.maxTag || 5)) delTag(res[0])
+    }
 
     return true
   }
@@ -70,14 +86,14 @@ export const useLayoutStore = defineStore("layout", () => {
     const index = tags.value.findIndex(i => i === tag)
     if (index === -1) return
 
-    const old = tags.value.splice(index, 1)[0]
-
-    if (old !== tag) return
+    tags.value.splice(index, 1)[0]
 
     // 删除的是当前标签时，跳转到相邻标签
-    const nextRoute = tags.value[index - 1] || tags.value[0]
+    if (tag === curTag.value) {
+      const nextRoute = tags.value[index - 1] || tags.value[0]
 
-    nextRoute && router.push(nextRoute)
+      nextRoute && router.push(nextRoute)
+    }
   }
 
   return { tags, curTag, push, setCurTag, delTag }

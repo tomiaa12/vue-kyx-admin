@@ -1,25 +1,23 @@
 <template>
   <div class="tag-container">
     <el-scrollbar view-class="scroll-view">
-      <router-link
+      <button
         v-for="data in layoutStore.tags"
-        :to="data"
+        :class="{
+          active: data === layoutStore.curTag,
+        }"
+        @mousedown="go(data)"
       >
-        <button
-          :class="{
-            active: data === layoutStore.curTag,
-          }"
+        <el-icon-clock class="mr-2" />
+        <span class="h-full truncate text-sm">{{ data.meta.title }}</span>
+        <el-icon
+          class="close"
+          @mousedown.stop
+          @click="handleClose(data)"
         >
-          <el-icon-clock class="mr-2" />
-          <span class="h-full truncate text-sm">{{ data.meta.title }}</span>
-          <el-icon
-            class="close"
-            @click.stop.prevent="handleClose(data)"
-          >
-            <el-icon-close />
-          </el-icon>
-        </button>
-      </router-link>
+          <el-icon-close />
+        </el-icon>
+      </button>
     </el-scrollbar>
     <el-icon-more-filled class="ml-auto shrink-0" />
   </div>
@@ -37,9 +35,9 @@ const layoutStore = useLayoutStore()
 const route = useRoute()
 const router = useRouter()
 
-const handleClose = (data: Tag) => {
-  layoutStore.delTag(data)
-}
+const handleClose = (data: Tag) => layoutStore.delTag(data)
+
+const go = (data: Tag) => router.push(data)
 
 watch(
   () => route,

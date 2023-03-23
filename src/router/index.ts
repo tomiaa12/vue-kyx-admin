@@ -16,8 +16,10 @@ declare module "vue-router" {
     fullScreen?: boolean
     // 页面缓存
     keepAlive?: boolean
-    // 是否不添加信息到标签页，（默认`false`）
+    // 是否不添加到标签页，（默认`false`）
     hiddenTag?: boolean
+    // 动态路由最大标签页数量，（默认 5）
+    maxTag?: number
   }
 }
 
