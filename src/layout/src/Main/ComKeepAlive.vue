@@ -1,5 +1,5 @@
 <template>
-  <router-view v-slot="{ Component, route }">
+  <router-view v-slot="{ Component }">
     <transition
       name="layout-fade"
       mode="out-in"
@@ -7,8 +7,8 @@
     >
       <keep-alive :include="include">
         <component
-          :is="wrapperComponent(route.fullPath, Component)"
-          :key="route.fullPath"
+          :is="wrapperComponent(route.path, Component)"
+          :key="route.path"
         />
       </keep-alive>
     </transition>
@@ -16,16 +16,23 @@
 </template>
 
 <script setup lang="ts">
-import { routes } from "@/router"
-import { formatTwoStageRoutes } from "@/utils"
-import { computed, h } from "vue"
+import { h, ref, watch } from "vue"
 import type { VNode, Component as ComponentType } from "vue"
+import { useRoute } from "vue-router"
 
 // 需要缓存的页面
-const include = computed(() =>
-  formatTwoStageRoutes(routes)
-    .filter(i => i.meta?.keepAlive)
-    .map(i => i.path)
+const route = useRoute()
+
+const include = ref<string[]>([])
+
+watch(
+  () => route.path,
+  () => {
+    if (route.meta.keepAlive) include.value.push(route.path)
+  },
+  {
+    immediate: true,
+  }
 )
 
 /**
@@ -33,12 +40,12 @@ const include = computed(() =>
  * https://github.com/vuejs/core/issues/6219#issuecomment-1186108732
  */
 const maps = new Map()
-const wrapperComponent = (fullPath: string, comp: VNode) => {
+const wrapperComponent = (path: string, comp: VNode) => {
   // 已创建过的 vnode 直接返回
-  if (maps.has(fullPath)) return maps.get(fullPath)
+  if (maps.has(path)) return maps.get(path)
 
   const wraper: ComponentType = {
-    name: fullPath,
+    name: path,
     render: () =>
       h(
         // component 没有跟节点会导致 transition 动画报错
@@ -51,7 +58,7 @@ const wrapperComponent = (fullPath: string, comp: VNode) => {
   }
   // 缓存以便下次返回,否者创建新的 h 函数会导致 vue 报错
   const vm = h(wraper)
-  maps.set(fullPath, vm)
+  maps.set(path, vm)
   return vm
 }
 </script>
