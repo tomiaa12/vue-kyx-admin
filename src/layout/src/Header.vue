@@ -1,5 +1,8 @@
 <template>
-  <transition name="layout-fade">
+  <transition
+    name="layout-fade"
+    appear
+  >
     <el-header v-show="!route.meta.fullScreen">
       <div class="left">
         <slot name="left">
@@ -34,18 +37,15 @@ const emits = defineEmits([])
 </script>
 <style lang="scss" scoped>
 .el-header {
-  @apply flex-bc absolute z-10 w-full  border-solid border-neutral-100 duration-1000;
-  transition: all 1s;
+  @apply flex-bc absolute z-10 w-full  border-solid border-neutral-100 bg-white/50 backdrop-blur duration-1000;
   --el-header-height: var(--header-height);
   padding-left: 0;
-  backdrop-filter: blur(10px);
-  background-color: rgba(255, 255, 255, 0.5);
   box-shadow: 0 2px 4px -3px rgb(0 0 0 / 0.1);
 }
 .left {
   padding: var(--el-header-padding);
   padding-right: 0;
-  width: var(--el-aside-width);
+  width: var(--aside-width);
 }
 .layout-fade-enter-from,
 .layout-fade-leave-to {

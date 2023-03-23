@@ -29,15 +29,21 @@ import { useRoute } from "vue-router"
 const route = useRoute()
 
 const headerHeight = computed(() => (route.meta.fullScreen ? 0 : "60px"))
-const tagHeight = computed(() => "40px")
+const tagHeight = computed(() => "50px")
+const asideWidth = computed(() => "200px")
 </script>
 
 <style lang="scss" scoped>
 .el-container {
   // layout header 高度
   --header-height: v-bind(headerHeight);
+
   // layout tag 标签高度
   --tag-height: v-bind(tagHeight);
+  --tag-container-padding: 20px;
+
+  // aside 侧边栏展开宽度
+  --aside-width: v-bind(asideWidth);
 }
 
 :deep(.layout-fade-leave-active),

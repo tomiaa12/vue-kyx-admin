@@ -3,6 +3,7 @@
     <transition
       name="layout-fade"
       mode="out-in"
+      appear
     >
       <keep-alive :include="include">
         <component
