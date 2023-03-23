@@ -11,12 +11,6 @@ export interface Tag {
   query?: { [prop: string]: any }
 }
 
-// 删除标签设置
-interface DelTagOptions {
-  // 删除后打开附近标签
-  openNearbyTags: boolean
-}
-
 export const useLayoutStore = defineStore("layout", () => {
   // 多标签列表
   const tags = ref<Tag[]>([])

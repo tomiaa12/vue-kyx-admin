@@ -1,23 +1,30 @@
 <template>
   <div class="tag-container">
     <el-scrollbar view-class="scroll-view">
-      <button
-        v-for="data in layoutStore.tags"
-        :class="{
-          active: data === layoutStore.curTag,
-        }"
-        @mousedown="go(data)"
+      <transition-group
+        enter-active-class="animate__zoomIn duration-100"
+        leave-active-class="animate__zoomOut duration-100"
       >
-        <el-icon-clock class="mr-2" />
-        <span class="h-full truncate text-sm">{{ data.meta.title }}</span>
-        <el-icon
-          class="close"
-          @mousedown.stop
-          @click="handleClose(data)"
+        <button
+          v-for="data in layoutStore.tags"
+          :key="data.path"
+          :class="{
+            active: data === layoutStore.curTag,
+          }"
+          @mousedown.left="go(data)"
+          @mousedown.middle="handleClose(data)"
         >
-          <el-icon-close />
-        </el-icon>
-      </button>
+          <el-icon-clock class="mr-2" />
+          <span class="h-full truncate text-sm">{{ data.meta.title }}</span>
+          <el-icon
+            class="close"
+            @mousedown.stop
+            @click="handleClose(data)"
+          >
+            <el-icon-close />
+          </el-icon>
+        </button>
+      </transition-group>
     </el-scrollbar>
     <el-icon-more-filled class="ml-auto shrink-0" />
   </div>
