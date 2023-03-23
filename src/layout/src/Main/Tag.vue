@@ -12,7 +12,10 @@
         >
           <el-icon-clock class="mr-2" />
           <span class="h-full truncate text-sm">{{ data.meta.title }}</span>
-          <el-icon class="close" @click="close">
+          <el-icon
+            class="close"
+            @click.stop.prevent="handleClose(data)"
+          >
             <el-icon-close />
           </el-icon>
         </button>
@@ -33,6 +36,10 @@ const layoutStore = useLayoutStore()
 
 const route = useRoute()
 const router = useRouter()
+
+const handleClose = (data: Tag) => {
+  layoutStore.delTag(data)
+}
 
 watch(
   () => route,

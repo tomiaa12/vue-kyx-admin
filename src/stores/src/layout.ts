@@ -1,6 +1,7 @@
 import { ref, computed } from "vue"
 import { defineStore } from "pinia"
 import type { RouteMeta, RouteLocationNormalizedLoaded } from "vue-router"
+import router from "@/router"
 
 export interface Tag {
   path: string
@@ -61,5 +62,23 @@ export const useLayoutStore = defineStore("layout", () => {
    */
   const setCurTag = (tag: Tag) => (curTag.value = tag)
 
-  return { tags, curTag, push, setCurTag }
+  /**
+   * 删除标签
+   * @param tag 标签
+   */
+  const delTag = (tag: Tag) => {
+    const index = tags.value.findIndex(i => i === tag)
+    if (index === -1) return
+
+    const old = tags.value.splice(index, 1)[0]
+
+    if (old !== tag) return
+
+    // 删除的是当前标签时，跳转到相邻标签
+    const nextRoute = tags.value[index - 1] || tags.value[0]
+
+    nextRoute && router.push(nextRoute)
+  }
+
+  return { tags, curTag, push, setCurTag, delTag }
 })
