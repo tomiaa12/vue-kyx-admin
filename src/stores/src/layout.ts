@@ -7,6 +7,7 @@ import router from "@/router"
 export interface Tag {
   path: string
   meta: RouteMeta
+  el?: HTMLButtonElement
   params?: { [prop: string]: any }
   query?: { [prop: string]: any }
 }

@@ -3,10 +3,11 @@
     <el-scrollbar view-class="scroll-view">
       <transition-group
         enter-active-class="animate__zoomIn duration-100"
-        leave-active-class="animate__zoomOut duration-100"
+        leave-active-class="tag-zoomOut duration-100"
       >
         <button
           v-for="data in layoutStore.tags"
+          :ref="el => (data.el = el as HTMLButtonElement)"
           :key="data.path"
           :class="{
             active: data === layoutStore.curTag,
@@ -42,7 +43,10 @@ const layoutStore = useLayoutStore()
 const route = useRoute()
 const router = useRouter()
 
-const handleClose = (data: Tag) => layoutStore.delTag(data)
+const handleClose = (data: Tag) => {
+  layoutStore.delTag(data)
+  data.el!.style.setProperty("--width", data.el!.offsetWidth + "px")
+}
 
 const go = (data: Tag) => router.push(data)
 
@@ -58,6 +62,28 @@ watch(
 )
 </script>
 <style lang="scss" scoped>
+.tag-padding-margin {
+  @apply mr-1 px-2 py-1;
+}
+@keyframes tagZoomOut {
+  0% {
+    @apply mr-1 px-2 py-1 opacity-100;
+    width: var(--width);
+  }
+  75% {
+    @apply mr-1 px-2 py-1 opacity-0;
+    transform: scale3d(0.3, 0.3, 0.3);
+    width: var(--width);
+  }
+  100% {
+    @apply m-0 w-0 p-0 opacity-0;
+  }
+}
+.tag-zoomOut {
+  animation-fill-mode: both;
+  animation-duration: var(--animate-duration);
+  animation-name: tagZoomOut;
+}
 .tag-container {
   @apply absolute left-0 z-10 flex w-full items-center bg-white/50 backdrop-blur transition-all;
   height: var(--tag-height);
@@ -81,7 +107,7 @@ watch(
   }
 
   button {
-    @apply flex-bc mr-1  rounded border border-transparent px-2 py-1  transition-all;
+    @apply flex-bc mr-1 rounded border border-transparent px-2 py-1   transition-all;
     &.active {
       @apply border border-gray-200 bg-white/50;
 
