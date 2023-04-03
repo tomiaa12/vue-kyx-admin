@@ -8,5 +8,6 @@
   // 保存代码时自动 eslint fix
   "editor.codeActionsOnSave": {
     "source.fixAll": true
-  }
+  },
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

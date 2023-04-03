@@ -11,7 +11,7 @@
           height: route.meta.fullScreen && '100%',
         }"
       >
-        <Tag />
+        <Tag v-if="!route.meta.fullScreen" />
         <Main />
       </el-scrollbar>
     </el-container>
@@ -49,5 +49,11 @@ const asideWidth = computed(() => "200px")
 :deep(.layout-fade-leave-active),
 :deep(.layout-fade-enter-active) {
   transition: 0.3s ease;
+}
+
+:deep(.el-scrollbar) {
+  .el-scrollbar__bar {
+    margin-top: 150px;
+  }
 }
 </style>

@@ -1,7 +1,8 @@
 import { ref, computed } from "vue"
 import { defineStore } from "pinia"
 import type { RouteMeta, RouteLocationNormalizedLoaded } from "vue-router"
-import router from "@/router"
+import router, { routes } from "@/router"
+import { deepEqual } from "@/utils"
 
 // 标签
 export interface Tag {
@@ -17,6 +18,11 @@ export const useLayoutStore = defineStore("layout", () => {
   const tags = ref<Tag[]>([])
   // 当前选中标签
   const curTag = ref<Tag>()
+
+  const init = () => {
+    // console.log(routes)
+  }
+  init()
 
   /**
    * 添加标签
@@ -36,6 +42,38 @@ export const useLayoutStore = defineStore("layout", () => {
     // 没有标题拒绝添加到标签
     if (!data.meta.title) return false
 
+    // 是否为动态路由
+    const path = route.matched[route.matched.length - 1].path
+    const isDynamic = path.includes(":")
+    if (isDynamic) {
+      // 正则匹配当前动态路由，/xxx/:id 改为 ^/xxx/[^/]+$
+      const reg = new RegExp(`^${path.replace(/:[^/]+/g, "[^/]+")}$`)
+
+      // 找出当前动态路由已添加的标签
+      const findTags = tags.value.filter(i => reg.test(i.path))
+
+      // 是否 params 相等
+      const isParamsEqual = findTags.some(i => deepEqual(i.params, data.params))
+
+      // 是否 query 相等
+      const isQueryEqual = findTags.some(i => deepEqual(i.query, data.query))
+
+      // 当前动态路由存在且参数匹配
+      if (findTags.length && isParamsEqual && isQueryEqual) {
+        // 找到当前动态路由设置高亮
+        setCurTag(
+          findTags.find(
+            i =>
+              deepEqual(i.params, data.params) && deepEqual(i.query, data.query)
+          )!
+        )
+        return true
+      }
+
+      // 超过最大动态路由数量时，删除第一个
+      if (findTags.length > (data.meta.maxTag || 5)) delTag(findTags[0])
+    }
+
     // 是否已添加
     const oldTag = tags.value.find(i => i.path === data.path)
 
@@ -50,19 +88,6 @@ export const useLayoutStore = defineStore("layout", () => {
 
     // 设置当前激活标签
     setCurTag(data)
-
-    // 是否为动态路由
-    const path = route.matched[route.matched.length - 1].path
-    const isDynamic = path.includes(":")
-    if (isDynamic) {
-      const reg = new RegExp(`^${path.replace(/:[^/]+/g, "[^/]+")}$`)
-
-      // 找出当前动态路由已添加的标签
-      const res = tags.value.filter(i => reg.test(i.path))
-
-      // 超过最大动态路由数量时，删除第一个
-      if (res.length > (data.meta.maxTag || 5)) delTag(res[0])
-    }
 
     return true
   }
