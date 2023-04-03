@@ -45,7 +45,7 @@ const router = useRouter()
 
 const handleClose = (data: Tag) => {
   layoutStore.delTag(data)
-  data.el!.style.setProperty("--width", data.el!.offsetWidth + "px")
+  if (data.el) data.el.style.setProperty("--width", data.el.offsetWidth + "px")
 }
 
 const go = (data: Tag) => router.push(data)
