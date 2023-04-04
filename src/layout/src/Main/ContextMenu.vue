@@ -9,6 +9,7 @@
       <li
         v-for="i of list"
         class="flex cursor-pointer items-center px-3 py-1 transition-all duration-300 hover:bg-[var(--el-color-primary-light-9)]"
+        @click="i.handler"
       >
         <component
           :is="useIcon(i.icon)"
@@ -24,10 +25,15 @@
 import { watch, type PropType, onMounted, onUnmounted } from "vue"
 import { ref } from "vue"
 import { useIcon } from "@/hooks"
+import type { Tag } from "@/stores"
 
 const props = defineProps({
   modelValue: {
     type: Boolean,
+  },
+  curMenuData: {
+    type: Object as PropType<Tag>,
+    default: () => ({}),
   },
 })
 const emits = defineEmits(["update:modelValue"])
@@ -38,10 +44,14 @@ const list = ref([
   {
     name: "刷新",
     icon: "el-icon-refresh",
+    handler() {},
   },
   {
     name: "关闭",
     icon: "el-icon-close",
+    handler() {
+      
+    },
   },
   {
     name: "关闭左侧",

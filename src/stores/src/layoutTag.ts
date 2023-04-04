@@ -125,6 +125,9 @@ export const useLayoutTagStore = defineStore("layoutTag", () => {
     const index = tags.value.findIndex(i => i === tag)
     if (index === -1) return
 
+    // 删除前设置固定宽度，否则会导致宽度 auto - 0px 无动画过渡
+    if (tag.el) tag.el.style.setProperty("width", tag.el.offsetWidth + "px")
+
     tags.value.splice(index, 1)[0]
 
     // 删除的是当前标签时，跳转到相邻标签

@@ -13,7 +13,7 @@
             active: data === layoutTagStore.curTag,
           }"
           @mousedown.left="go(data)"
-          @mousedown.middle="handleClose(data)"
+          @mousedown.middle="layoutTagStore.delTag(data)"
           @mousedown.right="openMenu(data, $event)"
           @contextmenu.prevent
         >
@@ -30,7 +30,7 @@
             v-if="!data.meta.fixedTag"
             class="close"
             @mousedown.left.middle.stop
-            @click="handleClose(data)"
+            @click="layoutTagStore.delTag(data)"
           >
             <el-icon-close />
           </el-icon>
@@ -41,6 +41,7 @@
   </div>
   <ContextMenu
     v-model="showMenu"
+    :cur-menu-data="curMenuData"
     class="fixed z-50"
     :style="menuStyle"
   />
@@ -60,13 +61,6 @@ const layoutTagStore = useLayoutTagStore()
 const route = useRoute()
 const router = useRouter()
 
-const handleClose = (data: Tag) => {
-  if (data.meta.fixedTag) return
-
-  layoutTagStore.delTag(data)
-  if (data.el) data.el.style.setProperty("--width", data.el.offsetWidth + "px")
-}
-
 const go = (data: Tag) => router.push(data)
 
 watch(
@@ -85,11 +79,12 @@ const menuStyle = ref<CSSProperties>({
   left: 0,
   top: 0,
 })
+const curMenuData = ref<Tag>()
 const openMenu = (data: Tag, e: MouseEvent) => {
   menuStyle.value.left = e.clientX + "px"
   menuStyle.value.top = e.clientY + "px"
   showMenu.value = true
-  console.log(e)
+  curMenuData.value = data
 }
 </script>
 <style lang="scss" scoped>
@@ -99,11 +94,10 @@ const openMenu = (data: Tag, e: MouseEvent) => {
 @keyframes tagZoomOut {
   0% {
     @apply mr-1 border-0 px-2 py-1 opacity-100;
-    width: var(--width);
   }
   100% {
     transform: scale3d(0, 0, 0);
-    @apply m-0 w-0  border-0 p-0 opacity-0;
+    @apply m-0 w-0 border-0 p-0 opacity-0;
   }
 }
 .tag-zoomOut {
