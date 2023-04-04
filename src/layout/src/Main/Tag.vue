@@ -17,7 +17,10 @@
           @mousedown.right="openMenu(data, $event)"
           @contextmenu.prevent
         >
-          <el-icon-clock class="mr-2" />
+          <component
+            :is="useIcon(data.meta.icon)"
+            class="mr-2"
+          />
           <span class="h-full truncate pr-2 text-sm">
             {{ data.meta.title }}
           </span>
@@ -46,6 +49,7 @@ import { watch, type PropType, ref, type CSSProperties } from "vue"
 import { useLayoutTagStore, type Tag } from "@/stores"
 import { useRoute, useRouter } from "vue-router"
 import ContextMenu from "./ContextMenu.vue"
+import { useIcon } from "@/hooks"
 // const props = defineProps({})
 // const emits = defineEmits([])
 
@@ -128,7 +132,7 @@ const openMenu = (data: Tag, e: MouseEvent) => {
   }
 
   button {
-    @apply flex-bc mr-1 overflow-hidden rounded border border-transparent px-2 py-1 transition-all duration-1000;
+    @apply flex-bc mr-1 overflow-hidden rounded border border-transparent px-2 py-1 text-base transition-all duration-1000;
     &.active {
       @apply border border-gray-200 bg-white/50;
 

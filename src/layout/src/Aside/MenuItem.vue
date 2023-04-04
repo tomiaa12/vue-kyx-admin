@@ -5,13 +5,20 @@
       v-if="!route.meta?.hiddenMenu"
       :index="route.path"
     >
-      <template #title>{{ route.meta?.title }}</template>
+      <template #title>
+        <component
+          :is="useIcon(route?.meta?.icon)"
+          class="mr-2"
+        />
+        {{ route.meta?.title }}
+      </template>
       <MenuItem :data="route.children" />
     </component>
   </template>
 </template>
 
 <script setup lang="ts">
+import { useIcon } from "@/hooks"
 import type { PropType } from "vue"
 import type { RouteRecordRaw } from "vue-router"
 
