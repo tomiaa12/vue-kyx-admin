@@ -17,10 +17,12 @@
           @mousedown.right="openMenu(data, $event)"
           @contextmenu.prevent
         >
-          <component
-            :is="useIcon(data.meta.icon)"
+          <el-icon
+            v-if="useIcon(data.meta.icon)"
             class="mr-2"
-          />
+          >
+            <component :is="useIcon(data.meta.icon)" />
+          </el-icon>
           <span class="h-full truncate pr-2 text-sm">
             {{ data.meta.title }}
           </span>
