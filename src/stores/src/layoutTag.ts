@@ -13,7 +13,7 @@ export interface Tag {
   query?: { [prop: string]: any }
 }
 
-export const useLayoutStore = defineStore("layout", () => {
+export const useLayoutTagStore = defineStore("layoutTag", () => {
   // 多标签列表
   const tags = ref<Tag[]>([])
   // 当前选中标签

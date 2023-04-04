@@ -6,11 +6,11 @@
         leave-active-class="tag-zoomOut duration-100"
       >
         <button
-          v-for="data in layoutStore.tags"
+          v-for="data in layoutTagStore.tags"
           :ref="el => (data.el = el as HTMLButtonElement)"
           :key="data.path"
           :class="{
-            active: data === layoutStore.curTag,
+            active: data === layoutTagStore.curTag,
           }"
           @mousedown.left="go(data)"
           @mousedown.middle="handleClose(data)"
@@ -43,13 +43,13 @@
 
 <script setup lang="ts">
 import { watch, type PropType, ref, type CSSProperties } from "vue"
-import { useLayoutStore, type Tag } from "@/stores"
+import { useLayoutTagStore, type Tag } from "@/stores"
 import { useRoute, useRouter } from "vue-router"
 import ContextMenu from "./ContextMenu.vue"
 // const props = defineProps({})
 // const emits = defineEmits([])
 
-const layoutStore = useLayoutStore()
+const layoutTagStore = useLayoutTagStore()
 
 const route = useRoute()
 const router = useRouter()
@@ -57,7 +57,7 @@ const router = useRouter()
 const handleClose = (data: Tag) => {
   if (data.meta.fixedTag) return
 
-  layoutStore.delTag(data)
+  layoutTagStore.delTag(data)
   if (data.el) data.el.style.setProperty("--width", data.el.offsetWidth + "px")
 }
 
@@ -66,7 +66,7 @@ const go = (data: Tag) => router.push(data)
 watch(
   () => route,
   () => {
-    layoutStore.push(route)
+    layoutTagStore.push(route)
   },
   {
     immediate: true,
