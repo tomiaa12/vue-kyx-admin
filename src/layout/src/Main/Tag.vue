@@ -16,8 +16,13 @@
           @mousedown.middle="handleClose(data)"
         >
           <el-icon-clock class="mr-2" />
-          <span class="h-full truncate text-sm">{{ data.meta.title }}</span>
+          <span class="h-full truncate pr-2 text-sm">
+            {{
+              data.meta.title
+            }}
+          </span>
           <el-icon
+            v-if="!data.meta.fixedTag"
             class="close"
             @mousedown.stop
             @click="handleClose(data)"
@@ -44,6 +49,8 @@ const route = useRoute()
 const router = useRouter()
 
 const handleClose = (data: Tag) => {
+  if (data.meta.fixedTag) return
+
   layoutStore.delTag(data)
   if (data.el) data.el.style.setProperty("--width", data.el.offsetWidth + "px")
 }
@@ -114,7 +121,7 @@ watch(
     }
     .close {
       width: unset;
-      @apply ml-2 h-5 w-5 shrink-0 overflow-hidden rounded-sm transition-all;
+      @apply h-5 w-5 shrink-0 overflow-hidden rounded-sm transition-all;
       &:hover {
         @apply bg-gray-200;
       }

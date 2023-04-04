@@ -6,20 +6,23 @@ import { formatTwoStageRoutes, resolveFullPath } from "@/utils"
 // 路由元信息配置
 declare module "vue-router" {
   interface RouteMeta {
-    // 标题
+    /** 标题 */
     title: string
-    // 在菜单中隐藏
+    /** 是否在菜单中隐藏 */
     hiddenMenu?: boolean
-    // 图标
+    /** 图标 */
     icon?: string
-    // 无 layout 全屏页面
+    /** 无 layout 全屏页面 */
     fullScreen?: boolean
-    // 页面缓存
+    /** 页面缓存 */
     keepAlive?: boolean
-    // 是否不添加到标签页，（默认`false`）
+    /** 是否不添加到标签页，（默认`false`） */
     hiddenTag?: boolean
-    // 动态路由最大标签页数量，（默认 5）
+    /** 动态路由最大标签页数量，（默认 5） */
     maxTag?: number
+    /** 固定到标签，不能关闭 */
+    fixedTag?: boolean
+    
   }
 }
 

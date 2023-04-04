@@ -2,7 +2,7 @@ import { ref, computed } from "vue"
 import { defineStore } from "pinia"
 import type { RouteMeta, RouteLocationNormalizedLoaded } from "vue-router"
 import router, { routes } from "@/router"
-import { deepEqual } from "@/utils"
+import { deepEqual, formatTwoStageRoutes } from "@/utils"
 
 // 标签
 export interface Tag {
@@ -20,9 +20,23 @@ export const useLayoutStore = defineStore("layout", () => {
   const curTag = ref<Tag>()
 
   const init = () => {
-    // console.log(routes)
+    /** 添加需要固定在标签的路由 */
+    const flotRoutes = formatTwoStageRoutes(routes)
+    flotRoutes.forEach(route => {
+      route.meta?.fixedTag &&
+        push({
+          path: route.path,
+          meta: route.meta,
+          matched: [],
+          query: {},
+          params: {},
+          fullPath: "",
+          redirectedFrom: undefined,
+          hash: "",
+          name: "",
+        })
+    })
   }
-  init()
 
   /**
    * 添加标签
@@ -43,7 +57,7 @@ export const useLayoutStore = defineStore("layout", () => {
     if (!data.meta.title) return false
 
     // 是否为动态路由
-    const path = route.matched[route.matched.length - 1].path
+    const path = route.matched[route.matched.length - 1]?.path || ""
     const isDynamic = path.includes(":")
     if (isDynamic) {
       // 正则匹配当前动态路由，/xxx/:id 改为 ^/xxx/[^/]+$
@@ -105,6 +119,9 @@ export const useLayoutStore = defineStore("layout", () => {
    * @param tag 标签
    */
   const delTag = (tag: Tag) => {
+    // 固定在菜单栏标签不能删除
+    if (tag.meta.fixedTag) return
+
     const index = tags.value.findIndex(i => i === tag)
     if (index === -1) return
 
@@ -117,6 +134,8 @@ export const useLayoutStore = defineStore("layout", () => {
       nextRoute && router.push(nextRoute)
     }
   }
+
+  init()
 
   return { tags, curTag, push, setCurTag, delTag }
 })
