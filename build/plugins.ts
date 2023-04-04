@@ -46,9 +46,7 @@ export default ({ command }: ConfigEnv): PluginOption[] => [
    * import IconComponent from './my-icon.svg?component'
    * <IconComponent />
    */
-  svgLoader({
-    defaultImport: "raw", // 默认以 raw 引入
-  }),
+  svgLoader(),
 
   /**
    * mock 支持

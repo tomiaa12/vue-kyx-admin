@@ -1,6 +1,3 @@
-// 样式重置
-@use "./src/reset";
-
 // Element Plus 样式
 @use "element-plus/dist/index.css";
 
@@ -12,6 +9,9 @@
 
 // tailwindCSS 原子类 (在 Element 样式之后，class 覆盖 Element 原有样式)
 @use "./src/tailwind";
+
+// 样式重置（在 tailwindCSS 覆盖 tailwindCSS 的默认样式）
+@use "./src/reset";
 
 // animate.css 动画 https://animate.style
 @use "animate.css";

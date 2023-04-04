@@ -212,9 +212,11 @@ body {
 }
 
 svg {
+  display: inline-block;
   width: 1em;
   height: 1em;
   cursor: pointer;
+  vertical-align: text-top;
 }
 
 /* 滚动条 */

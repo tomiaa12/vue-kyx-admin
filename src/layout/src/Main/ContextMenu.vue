@@ -8,9 +8,13 @@
     >
       <li
         v-for="i of list"
-        class="cursor-pointer px-3 py-1 transition-all duration-300 hover:bg-[var(--el-color-primary-light-9)]"
+        class="flex cursor-pointer items-center px-3 py-1 transition-all duration-300 hover:bg-[var(--el-color-primary-light-9)]"
       >
-        {{ i.name }}
+        <component
+          :is="useIcon(i.icon)"
+          class="mr-2"
+        />
+        <span>{{ i.name }}</span>
       </li>
     </ul>
   </transition>
@@ -19,6 +23,8 @@
 <script setup lang="ts">
 import { watch, type PropType, onMounted, onUnmounted } from "vue"
 import { ref } from "vue"
+import { useIcon } from "@/hooks"
+
 const props = defineProps({
   modelValue: {
     type: Boolean,
@@ -35,18 +41,23 @@ const list = ref([
   },
   {
     name: "关闭",
+    icon: "el-icon-close",
   },
   {
-    name: "关闭左侧标签页",
+    name: "关闭左侧",
+    icon: "el-icon-back",
   },
   {
-    name: "关闭右侧标签页",
+    name: "关闭右侧",
+    icon: "el-icon-right",
   },
   {
-    name: "关闭其他标签页",
+    name: "关闭其他",
+    icon: "el-icon-switch",
   },
   {
-    name: "关闭全部标签页",
+    name: "关闭全部",
+    icon: "el-icon-close",
   },
 ])
 
