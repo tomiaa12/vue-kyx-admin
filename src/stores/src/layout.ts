@@ -84,7 +84,9 @@ export const useLayoutStore = defineStore("layout", () => {
       return true
     }
 
-    tags.value.push(data)
+    const insertIndex = tags.value.findIndex(i => i === curTag.value)
+
+    tags.value.splice(insertIndex + 1, 0, data)
 
     // 设置当前激活标签
     setCurTag(data)

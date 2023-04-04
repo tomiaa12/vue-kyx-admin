@@ -67,16 +67,12 @@ watch(
 }
 @keyframes tagZoomOut {
   0% {
-    @apply mr-1 px-2 py-1 opacity-100;
-    width: var(--width);
-  }
-  75% {
-    @apply mr-1 px-2 py-1 opacity-0;
-    transform: scale3d(0.3, 0.3, 0.3);
+    @apply mr-1 border-0 px-2 py-1 opacity-100;
     width: var(--width);
   }
   100% {
-    @apply m-0 w-0 p-0 opacity-0;
+    transform: scale3d(0, 0, 0);
+    @apply m-0 w-0  border-0 p-0 opacity-0;
   }
 }
 .tag-zoomOut {
@@ -107,7 +103,7 @@ watch(
   }
 
   button {
-    @apply flex-bc mr-1 rounded border border-transparent px-2 py-1   transition-all;
+    @apply flex-bc mr-1 overflow-hidden rounded border border-transparent px-2 py-1 transition-all duration-1000;
     &.active {
       @apply border border-gray-200 bg-white/50;
 
