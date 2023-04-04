@@ -14,17 +14,17 @@
           }"
           @mousedown.left="go(data)"
           @mousedown.middle="handleClose(data)"
+          @mousedown.right="openMenu(data, $event)"
+          @contextmenu.prevent
         >
           <el-icon-clock class="mr-2" />
           <span class="h-full truncate pr-2 text-sm">
-            {{
-              data.meta.title
-            }}
+            {{ data.meta.title }}
           </span>
           <el-icon
             v-if="!data.meta.fixedTag"
             class="close"
-            @mousedown.stop
+            @mousedown.left.middle.stop
             @click="handleClose(data)"
           >
             <el-icon-close />
@@ -34,12 +34,19 @@
     </el-scrollbar>
     <el-icon-more-filled class="ml-auto shrink-0" />
   </div>
+  <ContextMenu
+    v-model="showMenu"
+    class="fixed z-50"
+    :style="menuStyle"
+  />
 </template>
 
 <script setup lang="ts">
-import { watch, type PropType } from "vue"
+import { watch, type PropType, ref, type CSSProperties } from "vue"
 import { useLayoutStore, type Tag } from "@/stores"
 import { useRoute, useRouter } from "vue-router"
+import ContextMenu from "./ContextMenu.vue"
+
 // const props = defineProps({})
 // const emits = defineEmits([])
 
@@ -67,6 +74,18 @@ watch(
     deep: true,
   }
 )
+
+const showMenu = ref(false)
+const menuStyle = ref<CSSProperties>({
+  left: 0,
+  top: 0,
+})
+const openMenu = (data: Tag, e: MouseEvent) => {
+  menuStyle.value.left = e.clientX + "px"
+  menuStyle.value.top = e.clientY + "px"
+  showMenu.value = true
+  console.log(e)
+}
 </script>
 <style lang="scss" scoped>
 .tag-padding-margin {

@@ -14,7 +14,9 @@ import ElementPlus from "element-plus"
 // Element 图标
 import ElementPlusIcons from "@element-plus/icons-vue/global"
 
-// import KComponents from "../../vue3-components/es"
+// 全局指令
+import directives from "./directives"
+
 import KComponents from "@tomiaa/vue3-components"
 
 const app = createApp(App)
@@ -25,5 +27,6 @@ app
   .use(ElementPlus)
   .use(ElementPlusIcons)
   .use(KComponents)
+  .use(directives)
 
 app.mount("#app")
