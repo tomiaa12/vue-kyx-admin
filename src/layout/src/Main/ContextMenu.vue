@@ -2,14 +2,22 @@
   <transition name="el-zoom-in-top">
     <ul
       v-if="show"
-      class="rounded py-2 text-sm shadow-md"
+      class="rounded py-2 text-sm shadow-md transition-all"
       @contextmenu.prevent
       @click.stop
     >
       <li
         v-for="i of list"
-        class="flex cursor-pointer items-center px-3 py-1 transition-all duration-300 hover:bg-[var(--el-color-primary-light-9)]"
-        @click="i.handler"
+        :class="{
+          'is-disabled': i.isDisabled?.(),
+        }"
+        @click="
+          () => {
+            if (i.isDisabled?.()) return
+            emits('update:modelValue', false)
+            i.handler?.()
+          }
+        "
       >
         <component
           :is="useIcon(i.icon)"
@@ -22,10 +30,10 @@
 </template>
 
 <script setup lang="ts">
-import { watch, type PropType, onMounted, onUnmounted } from "vue"
+import { watch, type PropType, onMounted, onUnmounted, computed } from "vue"
 import { ref } from "vue"
 import { useIcon } from "@/hooks"
-import type { Tag } from "@/stores"
+import { useLayoutTagStore, type Tag } from "@/stores"
 
 const props = defineProps({
   modelValue: {
@@ -37,9 +45,9 @@ const props = defineProps({
   },
 })
 const emits = defineEmits(["update:modelValue"])
-
+const layoutTagStore = useLayoutTagStore()
 const show = ref(false)
-
+const curIndex = computed(() => layoutTagStore.getIndexByTag(props.curMenuData))
 const list = ref([
   {
     name: "刷新",
@@ -50,24 +58,56 @@ const list = ref([
     name: "关闭",
     icon: "el-icon-close",
     handler() {
-      
+      layoutTagStore.delTag(props.curMenuData)
     },
+    isDisabled: () => props.curMenuData.meta.fixedTag,
   },
   {
     name: "关闭左侧",
     icon: "el-icon-back",
+    handler() {
+      layoutTagStore.tags.forEach((tag, i) => {
+        i < curIndex.value && layoutTagStore.delTag(tag)
+      })
+    },
+    isDisabled: () =>
+      !layoutTagStore.tags.some(
+        (tag, i) => i < curIndex.value && !tag.meta.fixedTag
+      ),
   },
   {
     name: "关闭右侧",
     icon: "el-icon-right",
+    handler() {
+      layoutTagStore.tags.forEach((tag, i) => {
+        i > curIndex.value && layoutTagStore.delTag(tag)
+      })
+    },
+    isDisabled: () =>
+      !layoutTagStore.tags.some(
+        (tag, i) => i > curIndex.value && !tag.meta.fixedTag
+      ),
   },
   {
     name: "关闭其他",
     icon: "el-icon-switch",
+    handler() {
+      layoutTagStore.tags.forEach((tag, i) => {
+        i != curIndex.value && layoutTagStore.delTag(tag)
+      })
+    },
+    isDisabled: () =>
+      !layoutTagStore.tags.some(
+        (tag, i) => i != curIndex.value && !tag.meta.fixedTag
+      ),
   },
   {
     name: "关闭全部",
     icon: "el-icon-close",
+    handler() {
+      layoutTagStore.tags.forEach(layoutTagStore.delTag)
+    },
+    isDisabled: () => !layoutTagStore.tags.some(tag => !tag.meta.fixedTag),
   },
 ])
 
@@ -96,5 +136,15 @@ onUnmounted(() => {
 <style lang="scss" scoped>
 ul {
   background-color: var(--el-bg-color);
+  li {
+    @apply flex cursor-pointer items-center px-3 py-1 transition-all duration-300;
+    &:not(.is-disabled):hover {
+      background-color: var(--el-color-primary-light-9);
+    }
+    &.is-disabled {
+      @apply cursor-not-allowed;
+      color: var(--el-text-color-disabled);
+    }
+  }
 }
 </style>

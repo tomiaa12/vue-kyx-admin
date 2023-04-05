@@ -115,6 +115,12 @@ export const useLayoutTagStore = defineStore("layoutTag", () => {
   const setCurTag = (tag: Tag) => (curTag.value = tag)
 
   /**
+   * 查询传入 tag 所在下标
+   */
+  const getIndexByTag = (tag: Tag): number =>
+    tags.value.findIndex(i => i === tag)
+
+  /**
    * 删除标签
    * @param tag 标签
    */
@@ -122,7 +128,7 @@ export const useLayoutTagStore = defineStore("layoutTag", () => {
     // 固定在菜单栏标签不能删除
     if (tag.meta.fixedTag) return
 
-    const index = tags.value.findIndex(i => i === tag)
+    const index = getIndexByTag(tag)
     if (index === -1) return
 
     // 删除前设置固定宽度，否则会导致宽度 auto - 0px 无动画过渡
@@ -140,5 +146,5 @@ export const useLayoutTagStore = defineStore("layoutTag", () => {
 
   init()
 
-  return { tags, curTag, push, setCurTag, delTag }
+  return { tags, curTag, push, setCurTag, delTag, getIndexByTag }
 })

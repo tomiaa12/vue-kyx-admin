@@ -14,6 +14,7 @@ export default {
       meta: {
         title: "菜单1-1",
         keepAlive: true,
+        fixedTag: true,
       },
       component: () => import("@/views/multilevel/menu1/index.vue"),
     },
