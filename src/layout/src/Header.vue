@@ -15,8 +15,9 @@
         </slot>
       </div>
 
-      <div class="right">
+      <div class="right flex-center">
         <slot name="right">
+          <KSwitchDark class="mr-4" />
           <Avatar />
         </slot>
       </div>
@@ -37,7 +38,7 @@ const emits = defineEmits([])
 </script>
 <style lang="scss" scoped>
 .el-header {
-  @apply flex-bc absolute z-10 w-full  border-solid border-neutral-100 bg-white/50 backdrop-blur duration-1000;
+  @apply flex-bc absolute z-10 w-full  border-solid border-neutral-100 bg-white/50 backdrop-blur duration-1000 dark:bg-transparent;
   --el-header-height: var(--header-height);
   padding-left: 0;
   box-shadow: 0 2px 4px -3px rgb(0 0 0 / 0.1);

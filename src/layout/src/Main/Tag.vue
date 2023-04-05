@@ -17,6 +17,7 @@
           @mousedown.right="openMenu(data, $event)"
           @contextmenu.prevent
         >
+          {{ nn(useIcon(data.meta.icon)) }}
           <el-icon
             v-if="useIcon(data.meta.icon)"
             class="mr-2"
@@ -106,7 +107,7 @@ const openMenu = (data: Tag, e: MouseEvent) => {
   animation-name: tagZoomOut;
 }
 .tag-container {
-  @apply absolute left-0 z-10 flex w-full items-center bg-white/50 backdrop-blur transition-all;
+  @apply absolute left-0 z-10 flex w-full items-center bg-white/50 backdrop-blur transition-all dark:bg-transparent;
   height: var(--tag-height);
   top: var(--header-height);
   padding-right: var(--tag-container-padding);
@@ -128,14 +129,14 @@ const openMenu = (data: Tag, e: MouseEvent) => {
   }
 
   button {
-    @apply flex-bc mr-1 overflow-hidden rounded border border-transparent px-2 py-1 text-base transition-all duration-1000;
+    @apply flex-bc mr-1 overflow-hidden rounded border border-transparent px-2 py-1 text-base transition-all duration-1000 dark:border-none;
     &.active {
-      @apply border border-gray-200 bg-white/50;
+      @apply border border-gray-200 bg-white/50 dark:border-none dark:bg-[#42414d] dark:shadow-none;
 
       box-shadow: 0 0 5px rgb(229 231 235 / var(--tw-border-opacity));
     }
     &:hover {
-      @apply bg-gray-100;
+      @apply bg-gray-100 dark:bg-[#35343a];
     }
     .close {
       width: unset;

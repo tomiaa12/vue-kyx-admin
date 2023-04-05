@@ -28,7 +28,7 @@ const route = useRoute()
   --el-menu-border-color: transparent;
 }
 .el-aside {
-  @apply bg-gray-50 shadow-xl duration-1000;
+  @apply bg-gray-50 shadow-xl duration-1000 dark:bg-transparent;
   padding-top: var(--header-height);
   width: var(--aside-width);
 }
