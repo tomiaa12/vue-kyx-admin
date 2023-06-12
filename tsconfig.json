@@ -9,8 +9,6 @@
     "types": [
       // Element 组件类型
       "element-plus/global",
-      // defineOptions 全局类型
-      "unplugin-vue-define-options/macros-global",
       // @intlify/unplugin-vue-i18n include 字段批量导入的语言
       "@intlify/unplugin-vue-i18n/messages"
     ]

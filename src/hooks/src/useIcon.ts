@@ -1,5 +1,5 @@
 import { ElIcon } from "element-plus"
-import { defineAsyncComponent, h, isVNode, type VNode } from "vue"
+import { defineAsyncComponent, h, isVNode } from "vue"
 
 /**
  * 使用 icon 图标

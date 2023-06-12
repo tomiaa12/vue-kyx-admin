@@ -31,9 +31,4 @@ module.exports = {
     parser: "@typescript-eslint/parser",
     sourceType: "module",
   },
-
-  globals: {
-    // unplugin-vue-define-options vite 插件的全局变量
-    defineOptions: "readonly",
-  },
 }

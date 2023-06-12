@@ -17,7 +17,7 @@
           @mousedown.right="openMenu(data, $event)"
           @contextmenu.prevent
         >
-          {{ nn(useIcon(data.meta.icon)) }}
+          <!-- {{ nn(useIcon(data.meta.icon)) }} -->
           <el-icon
             v-if="useIcon(data.meta.icon)"
             class="mr-2"

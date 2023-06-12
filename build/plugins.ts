@@ -1,7 +1,6 @@
 import type { ConfigEnv, PluginOption } from "vite"
 import vue from "@vitejs/plugin-vue"
 import vueJsx from "@vitejs/plugin-vue-jsx"
-import DefineOptions from "unplugin-vue-define-options/vite"
 import viteCompression from "vite-plugin-compression"
 import svgLoader from "vite-svg-loader"
 import visualizer from "rollup-plugin-visualizer"
@@ -15,15 +14,6 @@ export default ({ command }: ConfigEnv): PluginOption[] => [
 
   // jsx 支持
   vueJsx(),
-
-  /**
-   * 组件使用 DefineOptions 定义 setup script options
-   * https://vue-macros.sxzz.moe/macros/define-options.html
-   * defineOptions({
-   *   name: "ComponentName",
-   * })
-   */
-  DefineOptions(),
 
   /**
    * 打包体积分析插件可视化工具
