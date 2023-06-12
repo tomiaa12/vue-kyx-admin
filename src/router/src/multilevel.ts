@@ -23,8 +23,17 @@ export default {
       path: "menu2/:id",
       meta: {
         keepAlive: true,
-        title: "菜单1-2",
+        title: "动态路由",
+        hiddenMenu: true,
       },
+      component: () => import("@/views/multilevel/menu2/index.vue"),
+    },
+    {
+      name: "dynamic",
+      meta: {
+        title: "动态路由",
+      },
+      path: "dynamic",
       component: () => import("@/views/multilevel/menu2/index.vue"),
     },
   ],

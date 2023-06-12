@@ -1,4 +1,4 @@
-import { ref, computed } from "vue"
+import { ref } from "vue"
 import { defineStore } from "pinia"
 import type { RouteMeta, RouteLocationNormalizedLoaded } from "vue-router"
 import router, { routes } from "@/router"
@@ -6,9 +6,13 @@ import { deepEqual, formatTwoStageRoutes } from "@/utils"
 
 // 标签
 export interface Tag {
+  name: RouteLocationNormalizedLoaded["name"]
   path: string
   meta: RouteMeta
+
+  // tag 的 dom 元素
   el?: HTMLButtonElement
+
   params?: { [prop: string]: any }
   query?: { [prop: string]: any }
 }
@@ -44,7 +48,8 @@ export const useLayoutTagStore = defineStore("layoutTag", () => {
    * @return {boolean} 是否添加成功
    */
   const push = (route: RouteLocationNormalizedLoaded): boolean => {
-    const data = {
+    const data: Tag = {
+      name: route.name,
       path: route.path,
       meta: route.meta,
       query: route.query,
