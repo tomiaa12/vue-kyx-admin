@@ -6,7 +6,7 @@ export default {
   meta: {
     title: "首页",
     fixedTag: true,
-    icon: import("@/assets/svgs/home.svg"),
+    icon: import("@/assets/svgs/home.svg?component"),
   },
   component: () => import("@/views/home/index.vue"),
 } as RouteRecordRaw

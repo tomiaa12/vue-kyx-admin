@@ -1,6 +1,7 @@
 import type { RouteRecordRaw } from "vue-router"
 import NProgress from "nprogress"
-import { createRouter, createWebHistory } from "vue-router"
+import { createRouter, createWebHistory, } from "vue-router"
+import type { Component } from "vue"
 import { formatTwoStageRoutes, resolveFullPath } from "@/utils"
 
 // 路由元信息配置
@@ -11,7 +12,7 @@ declare module "vue-router" {
     /** 是否在菜单中隐藏 */
     hiddenMenu?: boolean
     /** 图标 */
-    icon?: string
+    icon?: string | Component
     /** 无 layout 全屏页面 */
     fullScreen?: boolean
     /** 页面缓存 */
