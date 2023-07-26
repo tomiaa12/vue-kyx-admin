@@ -63,7 +63,7 @@ const form = ref({
 const rules = {}
 
 const login = async () => {
-  await axios.post("/login", form.value)
+  import.meta.env.DEV && await axios.post("/login", form.value)
   router.push("/home")
 }
 </script>
